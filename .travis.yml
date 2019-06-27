@@ -2,22 +2,21 @@ sudo: required
 services:
     - docker
     
-    
 before_install:
     - docker build -t zmfrederick/docker-react -f Dockerfile.dev .
 
 script:
-    - docker run -e CI=true zmfrederick/docker-react npm test -- --coverage
+    - docker run -e CI=true zmfrederick/docker-react npm run test -- --coverage
     
 deploy:
     provider: elasticbeanstalk
     region: "us-east-2"
     app: "docker"
     env: "Docker-env"
-    bucket_name: "arn:aws:s3:::elasticbeanstalk-us-east-2-040857884270"
+    bucket_name: "elasticbeanstalk-us-east-2-040857884270"
     bucket_path: "docker"
     on:
         branch: master
-    access_key_id: "$AWS_ACCESS_KEY"
+    access_key_id: $AWS_ACCESS_KEY
     secret_access_key: 
         secure: "$AWS_SECRET_KEY"
