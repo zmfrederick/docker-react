@@ -6,7 +6,7 @@ before_install:
     - docker build -t zmfrederick/docker-react -f Dockerfile.dev .
 
 script:
-    - docker run -e CI=true zmfrederick/docker-react npm test -- --coverage
+    - docker run zmfrederick/docker-react npm run test -- --coverage
     
 deploy:
     provider: elasticbeanstalk
